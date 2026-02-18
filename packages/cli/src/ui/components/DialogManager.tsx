@@ -37,6 +37,7 @@ import { AgentConfigDialog } from './AgentConfigDialog.js';
 import { SessionRetentionWarningDialog } from './SessionRetentionWarningDialog.js';
 import { useCallback } from 'react';
 import { SettingScope } from '../../config/settings.js';
+import { ForeverModeOnboardingDialog } from './ForeverModeOnboardingDialog.js';
 
 interface DialogManagerProps {
   addItem: UseHistoryManagerReturn['addItem'];
@@ -108,6 +109,13 @@ export const DialogManager = ({
     );
   }
 
+  if (uiState.isOnboardingForeverMode) {
+    return (
+      <ForeverModeOnboardingDialog
+        onComplete={() => uiActions.setIsOnboardingForeverMode(false)}
+      />
+    );
+  }
   if (uiState.adminSettingsChanged) {
     return <AdminSettingsChangedDialog />;
   }

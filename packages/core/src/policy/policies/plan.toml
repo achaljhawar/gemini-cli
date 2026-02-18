@@ -54,3 +54,9 @@ decision = "allow"
 priority = 70
 modes = ["plan"]
 argsPattern = "\"file_path\":\"[^\"]+/\\.gemini/tmp/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/plans/[a-zA-Z0-9_-]+\\.md\""
+
+[[rule]]
+toolName = "schedule_work"
+decision = "allow"
+priority = 70
+modes = ["plan"]

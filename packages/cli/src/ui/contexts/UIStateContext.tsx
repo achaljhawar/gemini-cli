@@ -63,6 +63,7 @@ export interface QuotaState {
 }
 
 export interface UIState {
+  isOnboardingForeverMode: boolean;
   history: HistoryItem[];
   historyManager: UseHistoryManagerReturn;
   isThemeDialogOpen: boolean;
@@ -183,6 +184,9 @@ export interface UIState {
     text: string;
     type: TransientMessageType;
   } | null;
+  sisyphusSecondsRemaining: number | null;
+  isConfuciusMode: boolean;
+  confuciusModeSecondsRemaining: number | null;
 }
 
 export const UIStateContext = createContext<UIState | null>(null);

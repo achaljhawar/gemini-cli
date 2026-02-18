@@ -180,12 +180,16 @@ export enum CompressionStatus {
 
   /** The compression was not necessary and no action was taken */
   NOOP,
+
+  /** The compression was successful by archiving history to a file */
+  ARCHIVED,
 }
 
 export interface ChatCompressionInfo {
   originalTokenCount: number;
   newTokenCount: number;
   compressionStatus: CompressionStatus;
+  archivePath?: string;
 }
 
 export type ServerGeminiChatCompressedEvent = {

@@ -268,4 +268,12 @@ export class Storage {
   getHistoryFilePath(): string {
     return path.join(this.getProjectTempDir(), 'shell_history');
   }
+
+  getConfuciusModeStatePath(): string {
+    return path.join(this.getProjectTempDir(), 'confucius_state.json');
+  }
+
+  getKnowledgeDir(): string {
+    return path.join(this.getGeminiDir(), 'knowledge');
+  }
 }
