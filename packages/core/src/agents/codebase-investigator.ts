@@ -51,6 +51,8 @@ const CodebaseInvestigationReportSchema = z.object({
 export const CodebaseInvestigatorAgent = (
   config: Config,
 ): LocalAgentDefinition<typeof CodebaseInvestigationReportSchema> => {
+  console.log("!!");
+  console.log(config.getModel());
   // Use Preview Flash model if the main model supports modern features.
   // If the main model is not a modern model, use the default pro model.
   const model = supportsModernFeatures(config.getModel())
