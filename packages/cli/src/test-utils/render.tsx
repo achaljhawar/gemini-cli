@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { render as inkRenderDirect, type Instance as InkInstance } from 'ink';
+import {
+  render as inkRenderDirect,
+  type Instance as InkInstance,
+  type RenderOptions,
+} from 'ink';
 import { EventEmitter } from 'node:events';
 import { Box } from 'ink';
 import type React from 'react';
@@ -67,6 +71,13 @@ type TerminalState = {
   cols: number;
   rows: number;
 };
+
+type RenderMetrics = Parameters<NonNullable<RenderOptions['onRender']>>[0];
+
+interface InkRenderMetrics extends RenderMetrics {
+  output: string;
+  staticOutput?: string;
+}
 
 class XtermStdout extends EventEmitter {
   private state: TerminalState;
@@ -357,9 +368,10 @@ export const render = (
       debug: false,
       exitOnCtrlC: false,
       patchConsole: false,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onRender: (metrics: any) => {
-        stdout.onRender(metrics.staticOutput ?? '', metrics.output);
+      onRender: (metrics: RenderMetrics) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+        const inkMetrics = metrics as InkRenderMetrics;
+        stdout.onRender(inkMetrics.staticOutput ?? '', inkMetrics.output);
       },
     });
   });
